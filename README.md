@@ -9,6 +9,7 @@ First attempt to create a Node.js app with express-handlebars and mongodb
 
 # Upcoming Features
 - Login and Signup
+- Deploy database to mLab
 - Deploy to Heroku
 
 # Modules
