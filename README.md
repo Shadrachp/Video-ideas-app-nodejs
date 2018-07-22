@@ -6,6 +6,10 @@ First attempt to create a Node.js app with express-handlebars and mongodb
 - Add data to db
 - Edit data from db
 - Delete data from db
+- Login and Sign up
+- Authentication
+- Database deployed to mLab
+- Deployed to Heroku https://polar-ravine-45276.herokuapp.com
 
 # Modules
 1. body-parser
@@ -15,6 +19,8 @@ First attempt to create a Node.js app with express-handlebars and mongodb
 5. method-override
 6. express-session
 7. connect-flash
+8. passport
+9. passport-local
 
 # Steps
 1. Start mongodb service
