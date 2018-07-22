@@ -1,6 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const flash = require('connect-flash');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
@@ -13,11 +15,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/videa-dev')
  .then(()=>console.log('MongoDB Connected...'))
  .catch(err => console.log(err));  
-//                 , function(err, db) {
-//  if (err) throw err;
-//console.log("Database created!");
-//  db.close();
-//});
 
 
 //Load Schema model 'idea'
@@ -36,6 +33,27 @@ app.use(bodyParser.json());
 
 //method-override middleware
 app.use(methodOverride('_method'));
+
+//Express session middleware
+app.use(session({
+    secret: 'supersecret',
+    resave: true,
+    saveUninitialized: true,
+//    cookie: {secure: true}
+}));
+
+app.use(flash());
+
+//Global Variables
+app.use((req, res, next)=>{
+    res.locals.success_msg = req.flash('success_msg');
+    
+    res.locals.error_msg = req.flash('error_msg');
+    
+    res.locals.error = req.flash('error');
+    next();
+})
+
 
 ////How middleware works
 //app.use((req, res, next)=>{
@@ -103,6 +121,8 @@ app.post('/ideas', (req, res)=>{
             details: req.body.details
         }
         new Idea(newUser).save().then(idea=>{
+            req.flash('success_msg', 'Successfully added ' +
+                     idea.title + '!');
             res.redirect('/ideas');
         })
     }
@@ -124,15 +144,16 @@ app.put('/ideas/:id', (req, res)=>{
 });
 
 app.delete('/ideas/:id', (req, res)=>{
-    if(confirm("Are you sure you want to delete the video idea?") == true){
+//    if(confirm("Are you sure you want to delete the video idea?") == true){
         Idea.remove({
             _id: req.params.id
         }).then(()=>{
+            req.flash('success_msg', 'Video Idea deleted!');
             res.redirect('/ideas');
         });
-    }else{
+//    }else{
         
-    }
+//    }
 });
 
 //About Route
