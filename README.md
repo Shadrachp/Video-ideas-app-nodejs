@@ -13,6 +13,8 @@ First attempt to create a Node.js app with express-handlebars and mongodb
 3. mongoose
 4. nodemon
 5. method-override
+6. express-session
+7. connect-flash
 
 # Steps
 1. Start mongodb service
