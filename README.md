@@ -18,7 +18,7 @@ First attempt to create a Node.js app with express-handlebars and mongodb
 1. Start mongodb service
 2. Navigate to dir through terminal/cmd  
 3. type in 'nodemon'
-4. open localhost:3000 using browse
+4. open localhost:3000 using browser
 
 # Upcoming Features
 - Login and Signup
